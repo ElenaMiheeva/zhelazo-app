@@ -1,0 +1,162 @@
+@use "../../styles/variables" as *;
+
+/* ───── центр контейнера ───── */
+.pageContainer,
+.wrapper {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: var(--color-bg);
+  padding-bottom: 1rem;
+
+  @include down($bp-tablet) {
+    max-width: none;
+    padding-inline: 1rem;
+  }
+}
+
+/* ───── заголовок страницы ───── */
+.pageTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--color-text-heading);
+}
+
+/* ───── блок «мотивация дня» ───── */
+.motivationBlock {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow:
+          inset 0 2px 4px rgba(255,255,255,0.04),
+          0 6px 16px rgba(0,0,0,0.25);
+  margin-bottom: 1rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-heading);
+  }
+}
+
+/* ───── сетка цитат ───── */
+.quoteGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-around;
+}
+
+/* ───── обычная цитата ───── */
+.quoteBlock {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  background:
+          linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.06)),
+          var(--color-card-bg);
+  border-left: 5px solid var(--color-accent);
+  text-align: center;
+
+  h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: var(--color-text-heading);
+  }
+
+  blockquote {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+}
+
+/* ───── цитата «специальная» (Стетхэм) ───── */
+.stathamBlock {
+  @extend .quoteBlock;
+  background:
+          linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.06)),
+          var(--color-card-bg);
+  border-left-color: #ff5722;
+
+  h3 { color: #ff8a50; }
+  blockquote { color: var(--color-text); }
+}
+
+/* ───── блок ТОП пользователей ───── */
+.topSection {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow:
+          inset 0 2px 4px rgba(255,255,255,0.04),
+          0 6px 18px rgba(0,0,0,0.25);
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color-text-heading);
+}
+
+/* ───── грид карточек пользователей ───── */
+.topGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ───── карточка пользователя ───── */
+.topCard {
+  background:
+          linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.06)),
+          var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 180px;
+  transition: transform 0.2s;
+
+  &:hover { transform: translateY(-4px); }
+}
+
+.topHeader { display: flex; align-items: center; gap: 0.75rem; }
+
+.avatar   { font-size: 2.2rem; }
+
+.userInfo { display: flex; flex-direction: column; line-height: 1.1; }
+
+.userName { font-weight: 600; font-size: 1.05rem; color: var(--color-text-heading); }
+
+.userTag  { font-size: 0.85rem; color: var(--color-text); opacity: 0.75; }
+
+.medal    { margin-left: auto; font-size: 1.5rem; }
+
+.topHabit { font-style: italic; color: var(--color-text); }
+
+.streak   { margin-top: auto; font-weight: 500; color: var(--color-text); }
+
+/* ───── подпись внизу ───── */
+.footerNote {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-top: 0.75rem;
+}

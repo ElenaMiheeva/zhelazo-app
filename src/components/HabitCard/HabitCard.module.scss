@@ -1,0 +1,304 @@
+@use "../../styles/variables" as *;
+
+/* ───────── базовая карточка ───────── */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 300px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);             // теперь светлее, чем фон
+  box-shadow:
+          inset 0 2px 4px rgba(255,255,255,0.05),
+          0 4px 14px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px) rotate(-0.4deg);
+    box-shadow:
+            inset 0 2px 4px rgba(255,255,255,0.05),
+            0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  &.completed {
+    filter: grayscale(0.35) opacity(0.7);
+    box-shadow: none;
+  }
+
+  &.expanded {
+    z-index: 2;
+  }
+}
+
+.colorStripe {
+  width: 6px;
+  background: var(--color);
+}
+
+.content {
+  position: relative;
+  padding: 0.75rem 1.5rem 5.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+
+.meta {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.edit,
+.delete {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card:hover .edit,
+.card:hover .delete {
+  opacity: 0.7;
+}
+
+.checkBtn {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  background-color: var(--color-dot-bg);
+  color: var(--color-text-heading);
+  transition: background 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &.done {
+    background: var(--color);
+    color: var(--color-bg);
+  }
+}
+
+/* ───────── описание ───────── */
+.descriptionEditor {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.descriptionInput {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 70px;
+  transition: border 0.2s ease;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+
+  &:focus {
+    border-color: var(--color);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+}
+
+.editorButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.saveBtn {
+  background: var(--color);
+  color: var(--color-bg);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--color-accent-hover);
+  }
+}
+
+.cancelBtn {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--color-border);
+  }
+}
+
+.descriptionWrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  max-height: 0;
+
+  &.open,
+  &.editing {
+    max-height: 300px;
+  }
+}
+
+.slideTrigger {
+  position: relative;
+  height: 10px;
+  background: var(--color);
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+
+  &.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.slideArrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--color-text-heading);
+  pointer-events: none;
+}
+
+.slideContent {
+  background: var(--color-bg-secondary);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  .createdAt {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+}
+
+.bottomInfo {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+/* ───────── прогресс недели ───────── */
+.weekProgressWrapper {
+  padding: 20px 16px 0;
+  margin-bottom: 0.75rem;
+}
+
+.weekProgress {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.weekDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-dot-bg);
+  flex-shrink: 0;
+
+  &.filled {
+    background: var(--color, var(--color-accent));
+  }
+}
+
+/* ───────── точки streak ───────── */
+.filledDot,
+.emptyDot {
+  flex-grow: 1;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.filledDot {
+  background-color: var(--color);
+}
+
+.emptyDot {
+  background-color: var(--color-dot-bg);
+}

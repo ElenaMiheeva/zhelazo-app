@@ -1,0 +1,95 @@
+@use "../../styles/variables" as *;
+
+/* ───────── круг из часовых кнопок ───────── */
+.hourCircle {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 3rem auto 0;
+}
+
+/* кружок часа */
+.hourDot {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-dot-bg);          // пустое состояние
+  border: none;
+  font-weight: bold;
+  color: var(--color-text-heading);         // белый текст
+  transform: translate(-50%, -50%);
+  transition: background 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &.done {
+    background: var(--color);        // выполнено
+    color: var(--color-text-heading);       // белый текст
+  }
+
+  &.disabled {
+    opacity: 0.3;                           // неактивно
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+/* центральная кнопка/прогресс */
+.hourCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--color-text-heading);         // белый
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);  // лёгкий светлый hover
+  }
+}
+
+/* описание в модалке */
+.hourlyDescriptionEditor {
+  padding: 2rem 0 0;
+}
+
+.hourlyDescriptionInput {
+  width: 100%;
+  max-width: 100%;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);                // белый текст
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.hourlyEditorButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* отступ снизу, если нужно */
+.trimBottom {
+  padding-bottom: 2.5rem !important;
+}

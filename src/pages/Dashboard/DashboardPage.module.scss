@@ -1,0 +1,118 @@
+@use "../../styles/variables" as *;
+
+/* ───────── Контейнер ───────── */
+.wrapper {
+  max-width: 1366px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  flex: 1 0 auto;
+
+  padding-bottom: 4.25rem;
+
+  @include down($bp-tablet) {
+    max-width: none;
+    padding-inline: 1rem;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0;
+
+  > * {
+    align-self: flex-start;
+    justify-self: center;
+  }
+
+  @include down($bp-mobile) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.section {
+  margin-top: 2rem;
+  width: 100%;
+
+  &:first-of-type {
+    margin-top: 1rem;
+  }
+}
+
+.sectionTitle {
+  display: inline-block;        // чтобы ширина блока подгонялась под текст
+  //margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-heading);
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;                // линия повторяет ширину текста
+    height: 4px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+}
+
+.floatingButton {
+  position: fixed;
+  bottom: 2rem;   /* ★ главное изменение */
+  right: 2rem;
+  z-index: 999;
+
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(0 0 0 / 15%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: bottom 0.3s ease, background 0.2s ease, transform 0.2s ease;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .plus {
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: relative;
+    top: 0.05rem;
+  }
+}
+
+.lift {
+  bottom: calc(var(--footer-height) + 2rem);
+  transition: bottom .25s ease;
+}
