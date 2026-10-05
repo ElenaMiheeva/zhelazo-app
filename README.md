@@ -82,7 +82,7 @@
 ## 🌐 Деплой
 
 Проект развёрнут на GitHub Pages по адресу:  
-👉 [https://zhaglo.github.io/zhelazo-app/](https://zhaglo.github.io/zhelazo-app/)
+👉 [https://github.com/ElenaMiheeva/zhelazo-app](https://github.com/ElenaMiheeva/zhelazo-app)
 
 ---
 
@@ -175,7 +175,7 @@ npm run test
 ## 💻 Запуск проекта локально
 
 ```bash
-git clone https://github.com/Zhaglo/zhelazo-app.git
+git clone https://github.com/ElenaMiheeva/zhelazo-app
 cd zhelazo-app
 npm install
 npm run start
